@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Emirates Hub</title>
+    <link rel="stylesheet" href="cstyle.css">
+</head>
+<body>
+<div class="events-container" id="publicEvents">
+    <!-- Public Events (visible to everyone) -->
+    <h1>Upcoming Events</h1>
+    <div class="event-card">
+        <h2></h2>
+        <p><strong>Date:</strong> </p>
+        <p><strong>Location:</strong> </p>
+        <p></p>
+        <a href="#" class="btn"></a>
+    </div>
+</div>
+<div class="events-container" style="text-align:center; margin-top:30px;">
+  <a href="index.html" class="btn return-btn">⬅ Return</a>
+</div>
+
+<!-- Admin Section (hidden by default) -->
+<div id="adminEvents" class="events-container" style="display:none;">
+    <h1>Admin Event Management</h1>
+    
+    <!-- Add Event Button -->
+    <button id="addEventBtn" class="btn add-event-btn">➕ Add Event</button>
+
+    <!-- Event Form (hidden until clicked) -->
+    <form id="eventForm" style="display:none; margin-top:20px;">
+        <input type="text" id="title" placeholder="Event Title" required><br><br>
+        <input type="date" id="date" required><br><br>
+        <input type="text" id="location" placeholder="Location" required><br><br>
+        <textarea id="description" placeholder="Event Description" required></textarea><br><br>
+        <button type="submit" class="btn">Save Event</button>
+    </form>
+</div>
+<div class="event-card">
+    <h2>Airline Launch Event</h2>
+    <p><strong>Date:</strong> 15th September 2025</p>
+    <p><strong>Location:</strong> Dubai International Airport</p>
+    <p>Description: Official launch of the new Airbus fleet.</p>
+    <a href="#" class="btn">Register</a>
+
+    <!-- Admin buttons -->
+    <div class="admin-actions">
+        <button class="btn edit-btn">✏️ Edit</button>
+        <button class="btn delete-btn">🗑 Delete</button>
+    </div>
+</div>
+<script>
+    // Example role (replace with real session/DB value)
+    let userRole = "admin"; // or "user"
+
+    window.onload = function () {
+      if (userRole === "admin") {
+        document.getElementById("adminEvents").style.display = "block";
+
+        // Show admin actions on existing cards
+        document.querySelectorAll(".admin-actions").forEach(el => {
+          el.style.display = "flex";
+        });
+      }
+    };
+
+    // Show the form when "Add Event" is clicked
+    document.getElementById("addEventBtn").onclick = function () {
+      document.getElementById("eventForm").style.display = "block";
+    };
+
+    // Handle form submission (Add new event)
+    document.getElementById("eventForm").onsubmit = function (e) {
+      e.preventDefault();
+
+      let title = document.getElementById("title").value;
+      let date = document.getElementById("date").value;
+      let location = document.getElementById("location").value;
+      let description = document.getElementById("description").value;
+
+      // Create new event card
+      let newEvent = document.createElement("div");
+      newEvent.classList.add("event-card");
+      newEvent.innerHTML = `
+        <h2>${title}</h2>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Location:</strong> ${location}</p>
+        <p>${description}</p>
+        <a href="#" class="btn">Register</a>
+        <div class="admin-actions" style="display:${userRole === "admin" ? "flex" : "none"};">
+          <button class="btn edit-btn">✏️ Edit</button>
+          <button class="btn delete-btn">🗑 Delete</button>
+        </div>
+      `;
+
+      document.getElementById("publicEvents").appendChild(newEvent);
+
+      document.getElementById("eventForm").reset();
+      document.getElementById("eventForm").style.display = "none";
+    };
+
+    // Handle Delete
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("delete-btn")) {
+        if (confirm("Delete this event?")) {
+          e.target.closest(".event-card").remove();
+        }
+      }
+    });
+
+    // Handle Edit
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("edit-btn")) {
+        let card = e.target.closest(".event-card");
+        let title = card.querySelector("h2").innerText;
+        let date = card.querySelector("p:nth-of-type(1)").innerText.replace("Date: ", "");
+        let location = card.querySelector("p:nth-of-type(2)").innerText.replace("Location: ", "");
+        let description = card.querySelector("p:nth-of-type(3)").innerText;
+
+        // Fill form with current values
+        document.getElementById("title").value = title;
+        document.getElementById("date").value = date;
+        document.getElementById("location").value = location;
+        document.getElementById("description").value = description;
+
+        document.getElementById("eventForm").style.display = "block";
+
+        // Update instead of add
+        document.getElementById("eventForm").onsubmit = function (ev) {
+          ev.preventDefault();
+          card.querySelector("h2").innerText = document.getElementById("title").value;
+          card.querySelector("p:nth-of-type(1)").innerHTML = "<strong>Date:</strong> " + document.getElementById("date").value;
+          card.querySelector("p:nth-of-type(2)").innerHTML = "<strong>Location:</strong> " + document.getElementById("location").value;
+          card.querySelector("p:nth-of-type(3)").innerText = document.getElementById("description").value;
+
+          document.getElementById("eventForm").reset();
+          document.getElementById("eventForm").style.display = "none";
+
+          // Restore "add new event" mode
+          document.getElementById("eventForm").onsubmit = arguments.callee.caller;
+        };
+      }
+    });
+  </script>
+</body>
+</html>

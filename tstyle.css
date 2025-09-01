@@ -1,0 +1,159 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #222;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Containers */
+.training-container {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 20px;
+}
+
+/* Headings */
+.training-container h1 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #a4002d; /* Emirates deep red */
+  border-bottom: 2px solid #a4002d;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+/* Training Cards */
+.training-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.training-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.training-card h2 {
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.training-card p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.training-card strong {
+  color: #000;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: #a4002d;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #7d0022;
+  transform: scale(1.05);
+}
+
+/* Special Buttons */
+.add-training-btn {
+  background: #0077b6;
+}
+.add-training-btn:hover {
+  background: #005f8a;
+}
+
+.return-btn {
+  background: #6c757d;
+}
+.return-btn:hover {
+  background: #555;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #222;
+}
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+.delete-btn {
+  background: #dc3545;
+}
+.delete-btn:hover {
+  background: #b02a37;
+}
+
+/* Admin Actions */
+.admin-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Forms */
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #a4002d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .training-card {
+    padding: 15px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .training-container h1 {
+    font-size: 1.6rem;
+  }
+}

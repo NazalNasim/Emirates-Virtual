@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Flights – Emirates Hub</title>
+  <link rel="stylesheet" href="fstyle.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <h1 class="logo">✈ Emirates Hub</h1>
+      <nav>
+        <a href="index.html" class="btn btn-login">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero with background -->
+  <section class="hero-modern">
+    <div class="hero-content">
+      <h2>Book Your Flight</h2>
+      <p>Fly with comfort, elegance, and the world-class service of Emirates.</p>
+    </div>
+  </section>
+
+  <!-- Booking Form Card -->
+  <section class="container">
+    <div class="booking-card modern-card">
+      <form class="booking-form" id="flightForm">
+  <div class="form-group">
+    <label for="from">From</label>
+    <input type="text" id="from" placeholder="Dubai (DXB)" required>
+  </div>
+  <div class="form-group">
+    <label for="to">To</label>
+    <input type="text" id="to" placeholder="London (LHR)" required>
+  </div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your name" required>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="depart">Departure</label>
+      <input type="date" id="depart" required>
+    </div>
+    <div class="form-group">
+      <label for="return">Return</label>
+      <input type="date" id="return">
+    </div>
+  </div>
+  <button type="submit" class="btn-primary">Search Flights</button>
+  <p id="helperText">⚠️ Click 1 time — it may take a few seconds to process.</p>
+</form>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Emirates. All rights reserved.</p>
+  </footer>
+   <script>
+document.getElementById("flightForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const data = {
+    from: document.getElementById("from").value,
+    to: document.getElementById("to").value,
+    username: document.getElementById("username").value,
+    depart: document.getElementById("depart").value,
+    return: document.getElementById("return").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbyC6VegMmZ-lVMeaan7UB7DDeEbRHxa5WXmzLGmVld4V_sq7zOOGYpDLR-QkO-86Syr/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(msg => alert("Flight submitted successfully!"))
+  .catch(err => alert("Error: " + err));
+});
+</script>
+
+
+</body>
+</html>

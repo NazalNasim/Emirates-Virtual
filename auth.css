@@ -1,0 +1,31 @@
+/* ===== Base ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body { background: linear-gradient(135deg,#e0f7fa,#ffffff); min-height:100vh; color:#333; }
+
+/* ===== Container ===== */
+.container { max-width:400px; margin:80px auto; padding:30px; background:#fff; border-radius:20px; box-shadow:0 15px 40px rgba(0,0,0,0.1); text-align:center; }
+h1 { color:#1a73e8; margin-bottom:10px; font-size:28px; }
+.subtitle { color:#555; margin-bottom:30px; font-size:15px; }
+
+/* ===== Card ===== */
+.auth-card { background:#f0f8ff; border-radius:20px; padding:30px 20px; box-shadow:0 10px 25px rgba(0,0,0,0.08); transition:0.4s; }
+.auth-card:hover { transform:translateY(-5px); box-shadow:0 15px 30px rgba(0,0,0,0.15); }
+.auth-card h2 { color:#1a73e8; margin-bottom:20px; }
+
+/* ===== Forms ===== */
+.auth-card input { width:100%; padding:12px 15px; margin-bottom:15px; border-radius:12px; border:1px solid #ccc; font-size:14px; }
+.auth-btn { background:#ff6f00; color:#fff; padding:12px 25px; border:none; border-radius:50px; cursor:pointer; font-weight:500; transition:0.3s; }
+.auth-btn:hover { background:#e65c00; transform:translateY(-2px); }
+
+/* ===== Feedback ===== */
+.auth-feedback { margin-top:10px; font-weight:500; font-size:14px; }
+
+/* ===== Links ===== */
+a { color:#1a73e8; text-decoration:none; font-weight:500; }
+a:hover { text-decoration:underline; }
+
+/* ===== Responsive ===== */
+@media(max-width:450px){
+  .container { padding:25px 15px; }
+  .auth-btn { width:100%; }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training - Emirates Hub</title>
+  <link rel="stylesheet" href="tstyle.css">
+</head>
+<body>
+  <!-- Public Training Section -->
+  <div class="training-container" id="publicTraining">
+    <h1>Available Training Sessions</h1>
+    <div class="training-card">
+      <h2>Flight Safety Training</h2>
+      <p><strong>Date:</strong> 2025-09-20</p>
+      <p><strong>Location:</strong> Dubai HQ Training Center</p>
+      <p>Description: Mandatory annual safety refresher course for all crew members.</p>
+      <a href="#" class="btn">Enroll</a>
+
+      <!-- Admin actions (hidden by default) -->
+      <div class="admin-actions" style="display:none;">
+        <button class="btn edit-btn">✏️ Edit</button>
+        <button class="btn delete-btn">🗑 Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Training Section -->
+  <div id="adminTraining" class="training-container" style="display:none;">
+    <h1>Admin Training Management</h1>
+
+    <!-- Add Training Button -->
+    <button id="addTrainingBtn" class="btn add-training-btn">➕ Add Training</button>
+
+    <!-- Training Form -->
+    <form id="trainingForm" style="display:none; margin-top:20px;">
+      <input type="text" id="tTitle" placeholder="Training Title" required><br><br>
+      <input type="date" id="tDate" required><br><br>
+      <input type="text" id="tLocation" placeholder="Location" required><br><br>
+      <textarea id="tDescription" placeholder="Training Description" required></textarea><br><br>
+      <button type="submit" class="btn" id="saveBtn">Save Training</button>
+    </form>
+  </div>
+
+  <!-- Return Button -->
+  <div class="training-container" style="text-align:center; margin-top:30px;">
+    <a href="index.html" class="btn return-btn">⬅ Return</a>
+  </div>
+
+  <script>
+    let userRole = "admin"; // change to "user" to test
+
+    let editMode = false;
+    let cardBeingEdited = null;
+
+    window.onload = function () {
+      if (userRole === "admin") {
+        document.getElementById("adminTraining").style.display = "block";
+        document.querySelectorAll(".admin-actions").forEach(el => {
+          el.style.display = "flex";
+        });
+      }
+    };
+
+    // Show form for new training
+    document.getElementById("addTrainingBtn").onclick = function () {
+      editMode = false;
+      cardBeingEdited = null;
+      document.getElementById("trainingForm").reset();
+      document.getElementById("trainingForm").style.display = "block";
+    };
+
+    // Handle form submission
+    document.getElementById("trainingForm").onsubmit = function (e) {
+      e.preventDefault();
+
+      let title = document.getElementById("tTitle").value;
+      let date = document.getElementById("tDate").value;
+      let location = document.getElementById("tLocation").value;
+      let description = document.getElementById("tDescription").value;
+
+      if (editMode && cardBeingEdited) {
+        // Update existing card
+        cardBeingEdited.querySelector("h2").innerText = title;
+        cardBeingEdited.querySelector("p:nth-of-type(1)").innerHTML = "<strong>Date:</strong> " + date;
+        cardBeingEdited.querySelector("p:nth-of-type(2)").innerHTML = "<strong>Location:</strong> " + location;
+        cardBeingEdited.querySelector("p:nth-of-type(3)").innerText = description;
+      } else {
+        // Create new card
+        let newTraining = document.createElement("div");
+        newTraining.classList.add("training-card");
+        newTraining.innerHTML = `
+          <h2>${title}</h2>
+          <p><strong>Date:</strong> ${date}</p>
+          <p><strong>Location:</strong> ${location}</p>
+          <p>${description}</p>
+          <a href="#" class="btn">Enroll</a>
+          <div class="admin-actions" style="display:${userRole === "admin" ? "flex" : "none"};">
+            <button class="btn edit-btn">✏️ Edit</button>
+            <button class="btn delete-btn">🗑 Delete</button>
+          </div>
+        `;
+        document.getElementById("publicTraining").appendChild(newTraining);
+      }
+
+      document.getElementById("trainingForm").reset();
+      document.getElementById("trainingForm").style.display = "none";
+      editMode = false;
+      cardBeingEdited = null;
+    };
+
+    // Delete Training
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("delete-btn")) {
+        if (confirm("Delete this training?")) {
+          e.target.closest(".training-card").remove();
+        }
+      }
+    });
+
+    // Edit Training
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("edit-btn")) {
+        cardBeingEdited = e.target.closest(".training-card");
+        let title = cardBeingEdited.querySelector("h2").innerText;
+        let date = cardBeingEdited.querySelector("p:nth-of-type(1)").innerText.replace("Date:", "").trim();
+        let location = cardBeingEdited.querySelector("p:nth-of-type(2)").innerText.replace("Location:", "").trim();
+        let description = cardBeingEdited.querySelector("p:nth-of-type(3)").innerText;
+
+        // Populate form
+        document.getElementById("tTitle").value = title;
+        document.getElementById("tDate").value = date;
+        document.getElementById("tLocation").value = location;
+        document.getElementById("tDescription").value = description;
+
+        document.getElementById("trainingForm").style.display = "block";
+        editMode = true;
+      }
+    });
+  </script>
+</body>
+</html>

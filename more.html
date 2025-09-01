@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emirates Hub – More</title>
+  <link rel="stylesheet" href="more.css"> <!-- Use the modern CSS you created -->
+</head>
+<body>
+
+  <div class="container">
+    <h1>➕ More</h1>
+    <p class="subtitle">Discover everything Emirates has to offer in one hub.</p>
+
+    <div class="more-grid">
+      <!-- In-Flight Dining -->
+      <div class="more-card" onclick="window.location.href='dining.html'">
+        <h2>🍽️ In-Flight Dining</h2>
+        <p>Explore menus, special meals, and culinary experiences onboard.</p>
+        <button class="service-btn">Open</button>
+      </div>
+
+      <!-- Loyalty Program -->
+      <div class="more-card" onclick="window.location.href='loyalty.html'">
+        <h2>🎟️ Loyalty Program</h2>
+        <p>Check your Skywards points, status, and exclusive rewards.</p>
+        <button class="service-btn">Open</button>
+      </div>
+
+      <!-- Travel Guides -->
+      <div class="more-card" onclick="window.location.href='travel-guides.html'">
+        <h2>🗺️ Travel Guides</h2>
+        <p>Get destination tips, airport info, and local attractions.</p>
+        <button class="service-btn">Open</button>
+      </div>
+
+      <!-- Flight Status -->
+      <div class="more-card" onclick="window.location.href='flight-status.html'">
+        <h2>✈️ Flight Status</h2>
+        <p>Check departures, arrivals, and real-time flight updates.</p>
+        <button class="service-btn">Open</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="index.html" class="return-btn">⬅ Return to Hub</a>
+    </div>
+  </div>
+
+  <script>
+    // Make the entire card clickable by forwarding clicks on the button to the card
+    const cards = document.querySelectorAll('.more-card');
+    cards.forEach(card => {
+      const btn = card.querySelector('.service-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent double navigation
+        window.location.href = card.getAttribute('onclick').split("'")[1];
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passenger Services - Emirates Hub</title>
+  <link rel="stylesheet" href="ccstyle.css">
+</head>
+<body>
+  <div class="crew-container">
+    <h1>🛫 Passenger Services</h1>
+    <p class="subtitle">Access check-in, luggage info, and personalized support.</p>
+
+    <div class="services-grid">
+      <!-- Check-In -->
+      <div class="service-card">
+        <h2>🛂 Check-In</h2>
+        <p>Start your online check-in and get your boarding pass instantly.</p>
+        <button class="btn service-btn" onclick="window.location.href='flights.html'">Open</button>
+      </div>
+
+      <!-- Luggage Info -->
+      <div class="service-card">
+  <h2>🧳 Luggage Info</h2>
+  <p>Check baggage allowance, track luggage, and find helpful tips.</p>
+  <button class="btn service-btn" onclick="openModal('luggage')">Open</button>
+</div>
+
+<!-- Modal for Luggage Info -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div id="modal-text"></div>
+  </div>
+</div>
+
+      <!-- Personalized Support -->
+      <div class="service-card">
+        <h2>💁 Personalized Support</h2>
+        <p>Contact support for special requests or assistance.</p>
+        <button class="btn service-btn" onclick="window.open('https://discord.com/channels/1401170931455496283/1401511093372850296', '_blank')">Open</button>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="index.html" class="btn return-btn">⬅ Return to Main Hub</a>
+    </div>
+  </div>
+
+  <!-- Modal for Luggage Info -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div id="modal-text"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+  // Get modal elements
+  const modal = document.getElementById('modal');
+  const modalText = document.getElementById('modal-text');
+
+  // Function to open modal with content
+  function openModal(service) {
+    if (service === 'luggage') {
+      modalText.innerHTML = `
+        <h2>🧳 Luggage Info</h2>
+        <hr>
+        <h3>Baggage Allowance</h3>
+        <p>Carry-On: 7kg / 15lbs per passenger</p>
+        <p>Checked Luggage: Economy - 23kg / 50lbs, Business - 32kg / 70lbs, First Class - 40kg / 88lbs</p>
+
+        <h3>Tracking</h3>
+        <p>Enter your baggage tag number to track your luggage in real-time.</p>
+
+        <h3>Helpful Tips</h3>
+        <ul>
+          <li>Pack efficiently to avoid excess baggage fees.</li>
+          <li>Label your luggage with your contact info.</li>
+          <li>Check prohibited items before packing.</li>
+          <li>Keep valuables in your carry-on bag.</li>
+        </ul>
+      `;
+    }
+    // Show the modal
+    modal.style.display = 'block';
+  }
+
+  // Function to close modal
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  // Close modal if clicking outside the modal content
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+</script>
+
+</body>
+</html>

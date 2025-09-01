@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crew Tools - Emirates Hub</title>
+  <link rel="stylesheet" href="ccstyle.css">
+</head>
+<body>
+  <div class="crew-grid">
+  <!-- Checklists -->
+  <a href="checklists.html" class="crew-tool-link">
+    <div class="crew-tool">
+      <h2>📋 Checklists</h2>
+      <p>Pre-flight and post-flight checklists for all crew duties.</p>
+    </div>
+  </a>
+
+  <!-- Manuals -->
+  <a href="manuals.html" class="crew-tool-link">
+    <div class="crew-tool">
+      <h2>📖 Manuals</h2>
+      <p>Access safety, training, and operational manuals anytime.</p>
+    </div>
+  </a>
+
+  <!-- Reports -->
+  <a href="reports.html" class="crew-tool-link">
+    <div class="crew-tool">
+      <h2>🧾 Reports</h2>
+      <p>Submit and review incident reports and feedback logs.</p>
+    </div>
+  </a>
+</div>
+<a href="index.html" class="btn return-btn">⬅ Return to Crew Tools</a>
+    <footer class="footer">
+        <p>&copy; 2024 Emirates Hub. All rights reserved.</p>
+    </footer>
+     <script>
+    const form = document.getElementById('reportForm');
+    const table = document.getElementById('reportsTable');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent page reload
+
+      // Get input values
+      const title = document.getElementById('reportTitle').value;
+      const date = new Date().toLocaleString('en-US', { month: 'short', year: 'numeric' });
+
+      // Create new table row
+      const newRow = table.insertRow(-1);
+
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      const cell3 = newRow.insertCell(2);
+
+      cell1.textContent = title;
+      cell2.textContent = date;
+
+      const openBtn = document.createElement('button');
+      openBtn.textContent = 'Open';
+      openBtn.className = 'btn open-btn';
+      openBtn.addEventListener('click', () => {
+        alert(`Report: ${title}`);
+      });
+      cell3.appendChild(openBtn);
+
+      // Clear form
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emirates Hub – Login & Sign-Up</title>
+  <link rel="stylesheet" href="hub.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🛫 Emirates Hub</h1>
+    <p class="subtitle">Login or create an account to access full services.</p>
+
+    <div class="auth-grid">
+      <!-- Login Form -->
+      <div class="auth-card">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input type="email" id="loginEmail" placeholder="Email" required>
+          <input type="password" id="loginPassword" placeholder="Password" required>
+          <button type="submit" class="btn auth-btn">Login</button>
+        </form>
+        <p class="auth-feedback" id="loginFeedback"></p>
+      </div>
+
+      <!-- Sign-Up Form -->
+      <div class="auth-card">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+          <input type="text" id="signupName" placeholder="Full Name" required>
+          <input type="email" id="signupEmail" placeholder="Email" required>
+          <input type="password" id="signupPassword" placeholder="Password" required>
+          <button type="submit" class="btn auth-btn">Sign Up</button>
+        </form>
+        <p class="auth-feedback" id="signupFeedback"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Login simulation
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      if(email && password){
+        document.getElementById('loginFeedback').textContent = "✅ Login successful!";
+        document.getElementById('loginFeedback').style.color = "green";
+      } else {
+        document.getElementById('loginFeedback').textContent = "❌ Please fill in all fields.";
+        document.getElementById('loginFeedback').style.color = "red";
+      }
+    });
+
+    // Sign-Up simulation
+    document.getElementById('signupForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      if(name && email && password){
+        document.getElementById('signupFeedback').textContent = "✅ Account created successfully!";
+        document.getElementById('signupFeedback').style.color = "green";
+      } else {
+        document.getElementById('signupFeedback').textContent = "❌ Please fill in all fields.";
+        document.getElementById('signupFeedback').style.color = "red";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<script>
+function searchFlights(event) {
+  event.preventDefault();
+
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const depart = document.getElementById("depart").value;
+  const ret = document.getElementById("return").value;
+
+  // Redirect to results page with query string
+  window.location.href = `results.html?from=${from}&to=${to}&depart=${depart}&return=${ret}`;
+}
+</script>
+

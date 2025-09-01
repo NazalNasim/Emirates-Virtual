@@ -1,0 +1,159 @@
+/* ===== Global Styles ===== */
+body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Page container */
+.events-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Page heading */
+.events-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* ===== Event Cards ===== */
+.event-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.event-card h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: #d71920; /* Emirates Red */
+}
+
+.event-card p {
+    margin: 6px 0;
+    color: #555;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #d71920;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #a11216;
+    transform: scale(1.05);
+}
+
+/* Special admin button */
+.add-event-btn {
+    background: #007bff;
+}
+
+.add-event-btn:hover {
+    background: #0056b3;
+}
+
+/* ===== Admin Form ===== */
+#eventForm {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#eventForm input,
+#eventForm textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+#eventForm input:focus,
+#eventForm textarea:focus {
+    outline: none;
+    border-color: #d71920;
+    box-shadow: 0 0 0 3px rgba(215, 25, 32, 0.2);
+}
+
+#eventForm button {
+    background: #28a745;
+}
+
+#eventForm button:hover {
+    background: #1e7e34;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .events-container {
+        padding: 0 15px;
+    }
+
+    .event-card {
+        padding: 20px;
+    }
+
+    .event-card h2 {
+        font-size: 1.3rem;
+    }
+}
+/* ===== Admin Action Buttons ===== */
+.admin-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background: #ffc107;
+    color: #000;
+}
+
+.edit-btn:hover {
+    background: #e0a800;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #a71d2a;
+}
+/* Return Button */
+.return-btn {
+    background: #6c757d; /* Gray */
+}
+
+.return-btn:hover {
+    background: #5a6268;
+}
