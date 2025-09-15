@@ -27,33 +27,31 @@
   </section>
 
   <!-- Booking Form Card -->
-  <section class="container">
+ <section class="container">
     <div class="booking-card modern-card">
-      <form class="booking-form" id="flightForm">
-  <div class="form-group">
-   <form id="flightForm">
-  <label for="from">From</label>
-  <input type="text" id="from" name="from" required>
+      <form id="flightForm" class="booking-form">
 
-  <label for="to">To</label>
-  <input type="text" id="to" name="to" required>
+        <label for="from">From</label>
+        <input type="text" id="from" name="from" required>
 
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username" required>
+        <label for="to">To</label>
+        <input type="text" id="to" name="to" required>
 
-  <label for="departure">Departure</label>
-  <input type="date" id="departure" name="departure" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
 
-  <label for="return">Return</label>
-  <input type="date" id="return" name="return">
+        <label for="departure">Departure</label>
+        <input type="date" id="departure" name="departure" required>
 
-  <button type="submit" id="submitBtn">Search Flights</button>
-  <p id="helperText">⚠️ Click 1 time — it may take a few seconds to process.</p>
-</form>
+        <label for="return">Return</label>
+        <input type="date" id="return" name="return">
 
-<!-- Boarding Pass Preview -->
-<div id="boardingPass" class="boarding-pass" style="display:none;"></div>
+        <button type="submit" id="submitBtn">Search Flights</button>
+        <p id="helperText">⚠️ Click 1 time — it may take a few seconds to process.</p>
+      </form>
 
+      <!-- Boarding Pass -->
+      <div id="boardingPass" class="boarding-pass" style="display:none;"></div>
     </div>
   </section>
 
@@ -61,81 +59,60 @@
   <footer class="footer">
     <p>© 2025 Emirates. All rights reserved.</p>
   </footer>
-   <script>
-     <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("flightForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const helperText = document.getElementById("helperText");
-    const boardingPass = document.getElementById("boardingPass");
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault(); 
+  <!-- JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("flightForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const helperText = document.getElementById("helperText");
+      const boardingPass = document.getElementById("boardingPass");
 
-      submitBtn.disabled = true;
-      helperText.textContent = "⏳ Processing... please wait";
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
-      const data = {
-        from: document.getElementById("from").value,
-        to: document.getElementById("to").value,
-        username: document.getElementById("username").value,
-        departure: document.getElementById("departure").value,
-        return: document.getElementById("return").value,
-      };
+        submitBtn.disabled = true;
+        helperText.textContent = "⏳ Processing... please wait";
 
-      fetch("YOUR_SCRIPT_URL", {
-        method: "POST",
-        body: JSON.stringify(data),
-        mode: "no-cors",
-      })
-      .then(() => {
-        helperText.textContent = "✅ Flight submitted successfully!";
+        const data = {
+          from: document.getElementById("from").value,
+          to: document.getElementById("to").value,
+          username: document.getElementById("username").value,
+          departure: document.getElementById("departure").value,
+          return: document.getElementById("return").value,
+        };
 
-        // Show boarding pass
-        boardingPass.style.display = "block";
-        boardingPass.innerHTML = `
-          <h2>🎫 Boarding Pass</h2>
-          <div class="pass-row"><span class="pass-label">Passenger:</span> ${data.username}</div>
-          <div class="pass-row"><span class="pass-label">From:</span> ${data.from}</div>
-          <div class="pass-row"><span class="pass-label">To:</span> ${data.to}</div>
-          <div class="pass-row"><span class="pass-label">Departure:</span> ${data.departure}</div>
-          <div class="pass-row"><span class="pass-label">Return:</span> ${data.return || "One Way"}</div>
-          <div class="pass-row"><span class="pass-label">Status:</span> Confirmed ✅</div>
-        `;
+        // ✅ Send to Google Sheets
+        fetch("YOUR_SCRIPT_URL", {
+          method: "POST",
+          body: JSON.stringify(data),
+          mode: "no-cors",
+        })
+        .then(() => {
+          helperText.textContent = "✅ Flight submitted successfully!";
 
-        form.reset();
-        submitBtn.disabled = false;
-      })
-      .catch(err => {
-        helperText.textContent = "❌ Error submitting. Try again.";
-        submitBtn.disabled = false;
+          // ✅ Show Boarding Pass
+          boardingPass.style.display = "block";
+          boardingPass.innerHTML = `
+            <h2>🎫 Boarding Pass</h2>
+            <div class="pass-row"><span class="pass-label">Passenger:</span> ${data.username}</div>
+            <div class="pass-row"><span class="pass-label">From:</span> ${data.from}</div>
+            <div class="pass-row"><span class="pass-label">To:</span> ${data.to}</div>
+            <div class="pass-row"><span class="pass-label">Departure:</span> ${data.departure}</div>
+            <div class="pass-row"><span class="pass-label">Return:</span> ${data.return || "One Way"}</div>
+            <div class="pass-row"><span class="pass-label">Status:</span> Confirmed ✅</div>
+          `;
+
+          form.reset();
+          submitBtn.disabled = false;
+        })
+        .catch(err => {
+          helperText.textContent = "❌ Error submitting. Try again.";
+          submitBtn.disabled = false;
+        });
       });
     });
-  });
-</script>
-
-document.getElementById("flightForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const data = {
-    from: document.getElementById("from").value,
-    to: document.getElementById("to").value,
-    username: document.getElementById("username").value,
-    depart: document.getElementById("depart").value,
-    return: document.getElementById("return").value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbyC6VegMmZ-lVMeaan7UB7DDeEbRHxa5WXmzLGmVld4V_sq7zOOGYpDLR-QkO-86Syr/exec", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(res => res.text())
-  .then(msg => alert("Flight submitted successfully!"))
-  .catch(err => alert("Error: " + err));
-});
-</script>
-
+  </script>
 
 </body>
 </html>
-
