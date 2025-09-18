@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding:20px; background:#f4f4f4; }
+    h1 { text-align:center; }
+    table { width:100%; border-collapse:collapse; margin-top:20px; }
+    table, th, td { border:1px solid #ddd; }
+    th, td { padding:10px; text-align:center; }
+    .btn { background:#b71c1c; color:#fff; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:20px; }
+  </style>
+</head>
+<body>
+  <h1>🛒 Your Cart</h1>
+  <table id="cartTable">
+    <tr>
+      <th>Item</th>
+      <th>Price ($)</th>
+    </tr>
+  </table>
+  <h3 id="total"></h3>
+  <button class="btn" onclick="checkout()">Buy Now</button>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const table = document.getElementById("cartTable");
+    let total = 0;
+
+    cart.forEach(c => {
+      let row = table.insertRow();
+      row.insertCell(0).textContent = c.item;
+      row.insertCell(1).textContent = c.price;
+      total += c.price;
+    });
+
+    document.getElementById("total").textContent = "Total: $" + total;
+
+    function checkout() {
+      window.location.href = "bill.html";
+    }
+  </script>
+</body>
+</html>
