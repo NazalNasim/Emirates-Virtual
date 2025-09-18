@@ -3,232 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emirates Hub – Flight Booking</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f8f8;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #b71c1c;
-      color: #fff;
-      padding: 15px 30px;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
-    }
-
-    h2 {
-      margin-bottom: 15px;
-      color: #b71c1c;
-    }
-
-    label {
-      display: block;
-      margin: 8px 0 4px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    button {
-      background: #b71c1c;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #8e1616;
-    }
-
-    #helperText {
-      font-size: 13px;
-      color: #555;
-      text-align: center;
-      margin-top: -5px;
-      margin-bottom: 15px;
-    }
-
-    /* Boarding Pass Styling */
-    .boarding-pass {
-      max-width: 700px;
-      margin: 30px auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0px 6px 18px rgba(0,0,0,0.2);
-      font-family: Arial, sans-serif;
-      background: #fff;
-    }
-
-    .bp-header {
-      background: #b71c1c;
-      color: #fff;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .bp-header h2 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .ticket-id {
-      font-weight: bold;
-    }
-
-    .bp-body {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-    }
-
-    .bp-left {
-      flex: 2;
-      font-size: 14px;
-    }
-
-    .bp-left p {
-      margin: 6px 0;
-    }
-
-    .bp-left strong {
-      font-size: 12px;
-      color: #444;
-      text-transform: uppercase;
-    }
-
-    .bp-left .time {
-      font-weight: bold;
-      color: #b71c1c;
-    }
-
-    .bp-right {
-      flex: 1;
-      text-align: center;
-      border-left: 1px dashed #aaa;
-      padding-left: 15px;
-    }
-
-    .qr {
-      width: 100px;
-      height: 100px;
-      margin: 10px auto;
-      background: url('https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=boardingpass') no-repeat center/cover;
-    }
-
-    .barcode {
-      width: 120px;
-      height: 40px;
-      margin: 10px auto;
-      background: url('https://dummyimage.com/120x40/000/fff&text=||||||||||') no-repeat center/cover;
-    }
-  </style>
+  <title>Book Flights – Emirates Hub</title>
+  <link rel="stylesheet" href="fstyle.css">
 </head>
 <body>
 
-  <header>
-    <h1>✈ Emirates Hub</h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <h1 class="logo">✈ Emirates Hub</h1>
+      <nav>
+        <a href="index.html" class="btn btn-login">Home</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-    <h2>Book Your Flight</h2>
-    <form id="flightForm">
-      <label for="username">Passenger Name</label>
-      <input type="text" id="username" name="username" required>
-
-      <label for="from">From</label>
-      <input type="text" id="from" name="from" required>
-
-      <label for="to">To</label>
-      <input type="text" id="to" name="to" required>
-
-      <label for="departure">Departure Date</label>
-      <input type="date" id="departure" name="departure" required>
-
-      <label for="return">Return Date</label>
-      <input type="date" id="return" name="return">
-
-      <button type="submit" id="submitBtn">Search Flights</button>
-      <p id="helperText">⚠️ Click 1 time — it may take a few seconds to process.</p>
-    </form>
-  </div>
-
-  <!-- Boarding Pass -->
-  <div id="boardingPass" class="boarding-pass" style="display:none;">
-    <div class="bp-header">
-      <h2>Emirates Boarding Pass</h2>
-      <span class="ticket-id">#EK<span id="ticketNo">123</span></span>
+  <!-- Hero with background -->
+  <section class="hero-modern">
+    <div class="hero-content">
+      <h2>Book Your Flight</h2>
+      <p>Fly with comfort, elegance, and the world-class service of Emirates.</p>
     </div>
-    <div class="bp-body">
-      <div class="bp-left">
-        <p><strong>Passenger Name</strong><br><span id="bp-username"></span></p>
-        <p><strong>From</strong><br><span id="bp-from"></span> <span class="time" id="bp-departure-time">08:45</span></p>
-        <p><strong>To</strong><br><span id="bp-to"></span> <span class="time" id="bp-arrival-time">12:10</span></p>
-        <p><strong>Date</strong><br><span id="bp-date"></span></p>
-        <p><strong>Flight</strong><br><span id="bp-flight">EK123</span></p>
-        <p><strong>Class</strong><br><span id="bp-class">Economy</span></p>
-        <p><strong>Seat</strong><br><span id="bp-seat">14A</span></p>
-        <p><strong>Gate</strong><br><span id="bp-gate">A7</span></p>
-        <p><strong>Baggage</strong><br><span id="bp-baggage">2 pcs</span></p>
-      </div>
-      <div class="bp-right">
-        <div class="qr"></div>
-        <p>SCAN FOR DETAILS</p>
-        <div class="barcode"></div>
-      </div>
+  </section>
+
+  <!-- Booking Form Card -->
+  <section class="container">
+    <div class="booking-card modern-card">
+      <form class="booking-form" id="flightForm">
+  <div class="form-group">
+    <label for="from">From</label>
+    <input type="text" id="from" placeholder="Dubai (DXB)" required>
+  </div>
+  <div class="form-group">
+    <label for="to">To</label>
+    <input type="text" id="to" placeholder="London (LHR)" required>
+  </div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your name" required>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="depart">Departure</label>
+      <input type="date" id="depart" required>
+    </div>
+    <div class="form-group">
+      <label for="return">Return</label>
+      <input type="date" id="return">
     </div>
   </div>
+  <button type="submit" class="btn-primary">Search Flights</button>
+  <p id="helperText">⚠️ Click 1 time — it may take a few seconds to process.</p>
+</form>
 
-  <script>
-    document.getElementById("flightForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+    </div>
+  </section>
 
-      const data = {
-        username: document.getElementById("username").value,
-        from: document.getElementById("from").value,
-        to: document.getElementById("to").value,
-        departure: document.getElementById("departure").value,
-        return: document.getElementById("return").value
-      };
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Emirates. All rights reserved.</p>
+  </footer>
+   <script>
+document.getElementById("flightForm").addEventListener("submit", function(event) {
+  event.preventDefault();
 
-      // Fill boarding pass
-      document.getElementById("bp-username").textContent = data.username;
-      document.getElementById("bp-from").textContent = data.from;
-      document.getElementById("bp-to").textContent = data.to;
-      document.getElementById("bp-date").textContent = data.departure;
+  const data = {
+    from: document.getElementById("from").value,
+    to: document.getElementById("to").value,
+    username: document.getElementById("username").value,
+    depart: document.getElementById("depart").value,
+    return: document.getElementById("return").value
+  };
 
-      document.getElementById("bp-flight").textContent = "EK" + Math.floor(Math.random() * 900 + 100);
-      document.getElementById("bp-seat").textContent = Math.floor(Math.random() * 30 + 1) + String.fromCharCode(65 + Math.floor(Math.random() * 6));
-      document.getElementById("bp-gate").textContent = "A" + Math.floor(Math.random() * 20 + 1);
+  fetch("https://script.google.com/macros/s/AKfycbyC6VegMmZ-lVMeaan7UB7DDeEbRHxa5WXmzLGmVld4V_sq7zOOGYpDLR-QkO-86Syr/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(msg => alert("Flight submitted successfully!"))
+  .catch(err => alert("Error: " + err));
+});
+</script>
 
-      document.getElementById("boardingPass").style.display = "block";
-      document.getElementById("helperText").textContent = "✅ Boarding Pass Generated!";
-    });
-  </script>
 
 </body>
 </html>
-
