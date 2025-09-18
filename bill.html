@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Receipt</title>
+  <style>
+    body { font-family: monospace; background:#fff; padding:20px; max-width:400px; margin:auto; border:1px dashed #000; }
+    h2 { text-align:center; }
+    hr { border:1px dashed #aaa; }
+    .total { font-weight:bold; margin-top:15px; }
+  </style>
+</head>
+<body>
+  <h2>🧾 Emirates Duty Free</h2>
+  <p>Date: <span id="date"></span></p>
+  <hr>
+  <div id="billItems"></div>
+  <hr>
+  <p class="total" id="total"></p>
+  <p>Thank you for shopping with Emirates Duty Free!</p>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const billDiv = document.getElementById("billItems");
+    let total = 0;
+
+    cart.forEach(c => {
+      let p = document.createElement("p");
+      p.textContent = `${c.item} ....... $${c.price}`;
+      billDiv.appendChild(p);
+      total += c.price;
+    });
+
+    document.getElementById("total").textContent = "TOTAL: $" + total;
+    document.getElementById("date").textContent = new Date().toLocaleString();
+
+    // Clear cart after generating bill
+    localStorage.removeItem("cart");
+  </script>
+</body>
+</html>
