@@ -124,49 +124,59 @@
   <!-- Duty Free Products -->
   <div class="container">
     <h2>🛍 Duty Free Shopping</h2>
+
+    <div id="message">✅ Item added! Do you want to purchase more?</div>
+    
     <div class="products">
       <div class="product-card">
-        <img src="https://via.placeholder.com/220x180?text=Perfume" alt="Perfume">
+        <img src="https://i.pinimg.com/1200x/99/66/c7/9966c7e0c01f938f11330a77aeb34a07.jpg" alt="Luxury Perfume">
         <h3>Luxury Perfume</h3>
         <p>$120</p>
         <button class="btn" onclick="addToCart('Perfume',50)">Add to Cart</button>
       </div>
       <div class="product-card">
-        <img src="https://via.placeholder.com/220x180?text=Watch" alt="Watch">
+        <img src="https://i.pinimg.com/736x/4f/91/44/4f9144f451ecc9dc6dcc3abc23262375.jpg" alt="Classic Watch">
         <h3>Classic Watch</h3>
         <p>$250</p>
         <button class="btn" onclick="addToCart('Classic Watch',20)">Add to Cart</button>
       </div>
       <div class="product-card">
-        <img src="https://via.placeholder.com/220x180?text=Chocolate" alt="Chocolate">
+        <img src="https://i.pinimg.com/736x/fd/20/67/fd20672a0f7f7850431e1f0c331b951b.jpg" alt="Wrist Watch">
         <h3>Wrist Watch</h3>
         <p>$35</p>
         <button class="btn" onclick="addToCart('Wrist Watch',120)">Add to Cart</button>
       </div>
       <div class="product-card">
-        <img src="https://via.placeholder.com/220x180?text=Whiskey" alt="Whiskey">
-        <h3>Premium Whiskey</h3>
+        <img src="https://i.pinimg.com/1200x/10/88/d7/1088d72cdf2a31c00f7ca1e31c5eb4a2.jpg" alt="Galaxy Caramal">
+        <h3>Galaxy Caramal</h3>
         <p>$180</p>
-        <button class="btn" onclick="addtocard('Premium Whiskey',120)">Add to Cart>/button>
+        <button class="btn" onclick="addtocard('Premium Whiskey',120)">Add to Cart</button>
       </div>
     </div>
+  </div>
+    <div id="goCart">
+    <button onclick="goToCart()">🛒 Go to Cart</button>
   </div>
 
   <!-- Footer -->
   <footer>
     © 2025 Emirates Hub. All Rights Reserved.
   </footer>
-
-  <script>
+ <script>
     function addToCart(item, price) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.push({item, price});
       localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "cart.html"; // redirect to cart
+
+      // Show message + cart button
+      document.getElementById("message").style.display = "block";
+      document.getElementById("goCart").style.display = "block";
+    }
+
+    function goToCart() {
+      window.location.href = "cart.html";
     }
   </script>
-</body>
-</html>
 </body>
 </html>
 
